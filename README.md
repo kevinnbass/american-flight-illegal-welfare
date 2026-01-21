@@ -2,7 +2,7 @@
 
 An analysis of the relationship between state welfare benefits for illegal immigrants and domestic migration patterns.
 
-![Summary](output/social_v3_headline.png)
+![Combined Map and Chart](output/migration_combined_final.png)
 
 ## Key Finding
 
@@ -62,18 +62,9 @@ Average net domestic migration grouped by number of welfare benefits:
 
 ---
 
-### Combined Map and Chart
+### Social Media Summary
 
-![Combined](output/migration_combined_final.png)
-
-Geographic distribution of migration patterns with welfare benefit symbols overlaid on each state.
-
-**Benefit Key:**
-- Hc = Health coverage (children)
-- Ha = Health coverage (adults)
-- Hs = Health coverage (seniors 65+)
-- F = Food assistance
-- E = State EITC (ITIN filers)
+![Summary](output/social_v3_headline.png)
 
 ---
 
