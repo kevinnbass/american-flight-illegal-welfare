@@ -1,91 +1,151 @@
-# Domestic Migration vs Welfare Benefits for Illegal Immigrants
+# Americans Are Fleeing Illegal Immigrant Welfare States
 
-This repository analyzes the relationship between state-level welfare benefits for illegal immigrants and net domestic migration patterns in the United States.
+An analysis of the relationship between state welfare benefits for illegal immigrants and domestic migration patterns.
 
-## Key Findings
+![Summary](output/social_v3_headline.png)
 
-### Primary Result
-**States that offer welfare benefits to illegal immigrants experience significantly higher population outflow than states that don't.**
+## Key Finding
 
-| Metric | Value |
-|--------|-------|
-| Spearman correlation | rho = -0.57 (p < 0.0001) |
-| Pearson correlation | r = -0.45 (p = 0.001) |
-| Point-biserial correlation | r = -0.55 (p < 0.0001) |
+**9 of 10 top outflow states offer welfare benefits to illegal immigrants. Only 1 of 10 top inflow states does.**
 
-### Inflow Rates by Benefit Status
-- **States with zero benefits:** 72% have net population inflow (23 of 32)
-- **States with any benefits:** 24% have net population inflow (4 of 17)
+Fisher's exact test: **p = 0.0011**
 
-### Top 10 Analysis
-- **9 of 10** top outflow states offer benefits to illegal immigrants
-- **1 of 10** top inflow states offers benefits to illegal immigrants
-- Fisher's exact test: **p = 0.0011**
+---
 
-### Top 10 Outflow States
-| State | Migration % | Benefits |
-|-------|-------------|----------|
-| New York | -0.90% | Yes |
-| California | -0.88% | Yes |
-| Louisiana | -0.68% | No |
-| Illinois | -0.65% | Yes |
-| Maryland | -0.53% | Yes |
-| Massachusetts | -0.52% | Yes |
-| New Jersey | -0.52% | Yes |
-| District of Columbia | -0.38% | Yes |
-| Rhode Island | -0.30% | Yes |
-| Washington | -0.22% | Yes |
+## The Data
 
-### Top 10 Inflow States
-| State | Migration % | Benefits |
-|-------|-------------|----------|
-| South Carolina | +1.49% | No |
-| Delaware | +0.96% | No |
-| North Carolina | +0.91% | No |
-| Tennessee | +0.85% | No |
-| Florida | +0.81% | No |
-| Montana | +0.80% | No |
-| Idaho | +0.75% | No |
-| Maine | +0.69% | Yes |
-| Texas | +0.63% | No |
-| Alabama | +0.59% | No |
+Using 2023 US Census Bureau domestic migration data and state welfare policy data, we find a strong negative correlation between offering welfare benefits to illegal immigrants and net population inflow.
+
+### Correlation Statistics
+| Metric | Value | p-value |
+|--------|-------|---------|
+| Spearman rho | -0.570 | < 0.0001 |
+| Pearson r | -0.446 | 0.0013 |
+| Point-biserial r | -0.554 | < 0.0001 |
+
+### Inflow Rates
+| Category | Net Inflow Rate |
+|----------|----------------|
+| States with **zero benefits** | **72%** (23 of 32) |
+| States with **any benefits** | **24%** (4 of 17) |
+
+---
+
+## Visualizations
+
+### Scatter Plot: Benefits vs Migration
+
+![Scatter Plot](output/migration_any_scatter_pct.png)
+
+States with more welfare benefits for illegal immigrants tend to have greater population outflow. Each dot represents a state, colored by the number of benefit types offered (0-5).
+
+---
+
+### Binary Comparison: Any Benefits vs None
+
+![Binary Scatter](output/migration_any_scatter_binary_pct.png)
+
+Comparing states with any benefits (dark blue) to states with none (light blue). Red lines show group means:
+- **No Benefits:** +0.32% average net migration
+- **Has Benefits:** -0.26% average net migration
+
+---
+
+### Bar Chart: Migration by Benefit Level
+
+![Bar Chart](output/migration_bars_0_1to4_5_continental.png)
+
+Average net domestic migration grouped by number of welfare benefits:
+- **0 Benefits:** +0.32% (n=32)
+- **1-4 Benefits:** -0.23% (n=14)
+- **5 Benefits:** -0.40% (n=3)
+
+---
+
+### Combined Map and Chart
+
+![Combined](output/migration_combined_final.png)
+
+Geographic distribution of migration patterns with welfare benefit symbols overlaid on each state.
+
+**Benefit Key:**
+- Hc = Health coverage (children)
+- Ha = Health coverage (adults)
+- Hs = Health coverage (seniors 65+)
+- F = Food assistance
+- E = State EITC (ITIN filers)
+
+---
+
+## Top 10 States
+
+### Top 10 Outflow States (9 of 10 offer benefits)
+
+| Rank | State | Migration % | Benefits |
+|------|-------|-------------|----------|
+| 1 | New York | -0.90% | Yes |
+| 2 | California | -0.88% | Yes |
+| 3 | Louisiana | -0.68% | No |
+| 4 | Illinois | -0.65% | Yes |
+| 5 | Maryland | -0.53% | Yes |
+| 6 | Massachusetts | -0.52% | Yes |
+| 7 | New Jersey | -0.52% | Yes |
+| 8 | District of Columbia | -0.38% | Yes |
+| 9 | Rhode Island | -0.30% | Yes |
+| 10 | Washington | -0.22% | Yes |
+
+### Top 10 Inflow States (1 of 10 offers benefits)
+
+| Rank | State | Migration % | Benefits |
+|------|-------|-------------|----------|
+| 1 | South Carolina | +1.49% | No |
+| 2 | Delaware | +0.96% | No |
+| 3 | North Carolina | +0.91% | No |
+| 4 | Tennessee | +0.85% | No |
+| 5 | Florida | +0.81% | No |
+| 6 | Montana | +0.80% | No |
+| 7 | Idaho | +0.75% | No |
+| 8 | Maine | +0.69% | Yes |
+| 9 | Texas | +0.63% | No |
+| 10 | Alabama | +0.59% | No |
+
+---
+
+## Additional Statistics
+
+### Excluding Maine (the only inflow state with benefits)
+
+22 states have higher population inflow than Vermont (+0.12%), the next-highest inflow welfare state after Maine. **All 22 are zero-benefit states.**
+
+---
 
 ## Data Sources
 
 ### Migration Data
 - **Source:** US Census Bureau Population Estimates 2023
-- **Metric:** Net domestic migration (interstate moves only, excludes international migration)
-- **Year:** 2023
+- **Metric:** Net domestic migration (interstate moves only)
 
 ### Welfare Policy Data
-Five benefit categories are tracked for illegal immigrant eligibility:
+Five benefit categories tracked:
 
 | Benefit | Source |
 |---------|--------|
 | Health coverage (children) | KFF, NILC |
 | Health coverage (adults) | KFF, NILC |
 | Health coverage (seniors 65+) | KFF, NILC |
-| Food assistance (SNAP-like) | NILC |
+| Food assistance | NILC |
 | State EITC (ITIN filers) | ITEP |
+
+---
 
 ## Methodology
 
-### Scope
-- **Continental US only** (excludes Alaska and Hawaii)
-- 49 states + District of Columbia = 49 observations
+- **Scope:** Continental US (excludes Alaska and Hawaii) — 49 states + DC
+- **Migration metric:** Net domestic migration as percentage of state population
+- **Benefit score:** Sum of 5 binary indicators (0-5 scale)
+- **Statistical tests:** Spearman correlation, Pearson correlation, point-biserial correlation, Fisher's exact test
 
-### Analysis Approach
-1. Merged state welfare policies with Census migration data
-2. Calculated migration as percentage of state population
-3. Created total benefit score (0-5) for each state
-4. Computed correlations and statistical tests
-5. Analyzed top 10 inflow/outflow states
-
-### Statistical Tests
-- **Spearman correlation:** Non-parametric rank correlation (robust to outliers)
-- **Pearson correlation:** Linear correlation coefficient
-- **Point-biserial correlation:** Binary (any benefit vs none) correlation
-- **Fisher's exact test:** Contingency table analysis for top 10 comparison
+---
 
 ## Repository Structure
 
@@ -93,54 +153,35 @@ Five benefit categories are tracked for illegal immigrant eligibility:
 ├── README.md
 ├── requirements.txt
 ├── data/
-│   ├── state_policies.csv      # Welfare policy data by state
+│   ├── state_policies.csv
 │   └── net_domestic_migration_2023.csv
 ├── src/
-│   └── analysis.py             # Self-contained analysis script
+│   └── analysis.py
 └── output/
-    ├── scatter_benefits_migration.png
-    ├── scatter_binary_migration.png
-    ├── bar_chart_migration.png
-    ├── map_migration_benefits.png
-    └── social_graphic.png
+    ├── social_v3_headline.png
+    ├── migration_any_scatter_pct.png
+    ├── migration_any_scatter_binary_pct.png
+    ├── migration_bars_0_1to4_5_continental.png
+    └── migration_combined_final.png
 ```
 
 ## Usage
 
 ```bash
-# Install dependencies
 pip install -r requirements.txt
-
-# Run analysis
 python src/analysis.py
 ```
 
-This generates all figures and prints statistics to the console.
-
-## Output Figures
-
-### Scatter Plot: Benefits vs Migration
-Shows relationship between total number of benefit types (0-5) and net migration percentage.
-
-### Binary Scatter: Any Benefits vs Migration
-Compares states with any benefits to states with none, showing mean migration for each group.
-
-### Bar Chart: Migration by Benefit Level
-Groups states into 0, 1-4, and 5 benefits categories showing average migration.
-
-### Map: Geographic Distribution
-Choropleth map showing migration patterns with welfare benefit symbols overlaid.
-
-### Social Graphic
-Summary graphic for social media showing top 10 inflow/outflow state comparisons.
+---
 
 ## Limitations
 
-1. **Correlation is not causation.** This analysis shows association, not causal relationship.
-2. **Confounding variables.** Many factors affect migration (cost of living, climate, jobs, taxes, etc.).
-3. **Single year data.** Uses 2023 migration only; trends may vary year to year.
-4. **Binary classification.** Welfare policies have nuances not captured by 0/1 coding.
-5. **Population weighting.** Analysis treats all states equally regardless of population size.
+1. **Correlation ≠ causation.** Many factors affect migration decisions.
+2. **Single year.** Uses 2023 data only.
+3. **Confounders.** Cost of living, taxes, climate, job markets, etc. not controlled.
+4. **Binary coding.** Welfare policies have nuances not fully captured.
+
+---
 
 ## License
 
